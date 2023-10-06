@@ -3,8 +3,25 @@
     "name": "ValorantApp",
     "slug": "ValorantApp",
     "version": "1.0.0",
+    "splash" : {
+      "image": "src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "android":{
+      "package": "com.valorantapp",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "src/assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      }
+    },
+ 
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      "expo-router"
     ]
   }
 }

@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchValorantData } from "../services/valorantServices";
 
@@ -8,8 +14,11 @@ function AgentList() {
   const agents = useSelector((state) => state.data);
   const error = useSelector((state) => state.error);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     dispatch(fetchValorantData());
+    setLoading(false);
   }, [dispatch]);
 
   if (error) {
@@ -19,10 +28,10 @@ function AgentList() {
       </View>
     );
   }
-  if (!agents) {
+  if (loading) {
     return (
-      <View style={styles.container}>
-        <Text>Loading...</Text>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }

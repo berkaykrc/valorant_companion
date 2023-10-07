@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 function AgentStack() {
     return (
         <Stack.Navigator
-            initialRouteName="Agents"
+            initialRouteName="AgentsList"
             screenOptions={{ headerShown: false }}
         >
             <Stack.Screen name="AgentsList" component={AgentScreen} />

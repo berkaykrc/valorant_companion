@@ -5,21 +5,29 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
+  Image,
+  Pressable,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchValorantData } from "../services/valorantServices";
+import { fetchAgentById, fetchAgentsData } from "../services/agentServices";
+//import { useNavigation } from '@react-navigation/native';
 
-function AgentList() {
+function AgentList({ navigation }) {
   const dispatch = useDispatch();
-  const agents = useSelector((state) => state.data);
+  const agents = useSelector((state) => state.agents);
   const error = useSelector((state) => state.error);
+  //const navigation = useNavigation(); // add this line to get the navigation object
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchValorantData());
+    if (agents) {
+      setLoading(false);
+      return;
+    }
+    dispatch(fetchAgentsData());
     setLoading(false);
-  }, [dispatch]);
+  }, []);
 
   if (error) {
     return (
@@ -35,17 +43,28 @@ function AgentList() {
       </View>
     );
   }
-
+  console.log(agents);
   return (
     <View style={styles.container}>
       <FlatList
         data={agents}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.uuid.toString()}
         numColumns={2}
         renderItem={({ item }) => (
-          <View style={styles.agentContainer}>
-            <Text>{item.name}</Text>
-          </View>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("AgentDetails", { agent: item.uuid });
+              dispatch(fetchAgentById(item.uuid));
+            }}
+            style={styles.agentContainer}
+          >
+            <Image
+              style={{ width: 25, height: 25 }}
+              source={{ uri: item.displayIcon }}
+              resizeMode="contain"
+            />
+            <Text>{item.displayName}</Text>
+          </Pressable>
         )}
       />
     </View>
@@ -56,6 +75,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    justifyContent: "space-evenly",
   },
   agentContainer: {
     flex: 1,

@@ -1,11 +1,12 @@
 import React from "react";
-import { View } from "react-native";
-//import AgentsList from "../components/AgentsList.js";
+import { View, Text } from "react-native";
 
-const AgentDetails = () => {
+const AgentDetails = ({ route }) => {
+  const { agent } = route.params;
+  console.log(agent.uuid);
   return (
     <View>
-      <AgentsList />
+      <Text>Agent Details</Text>
     </View>
   );
 };

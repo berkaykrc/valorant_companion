@@ -1,5 +1,9 @@
 import axios from "axios";
-import { fetchDataSuccess, fetchDataFailure } from "../reducers/agentsReducer";
+import {
+  fetchDataSuccess,
+  fetchDataFailure,
+  agentById
+} from "../reducers/agentsReducer";
 
 const BASE_URL = "https://valorant-api.com/v1";
 
@@ -10,10 +14,6 @@ export const fetchAgentsData = () => {
         `${BASE_URL}/agents?isPlayableCharacter=true`
       );
       const { data } = response.data;
-      console.log(response.status);
-      console.log(data);
-      const a = fetchDataSuccess(data);
-      console.log(a);
       dispatch(fetchDataSuccess(data));
     } catch (error) {
       const errorMessage = error.message;
@@ -27,7 +27,7 @@ export const fetchAgentById = ({ uuid }) => {
     try {
       const response = await axios.get(`${BASE_URL}/agents/${uuid}`);
       const { data } = response.data;
-      dispatch(fetchDataSuccess(data));
+      dispatch(agentById(data));
     } catch (error) {
       const errorMessage = error.message;
       dispatch(fetchDataFailure(errorMessage));

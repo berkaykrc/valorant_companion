@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   agents: null,
-  agent: null,
+  agent : null,
 };
 
 const agentsSlice = createSlice({
@@ -12,8 +12,6 @@ const agentsSlice = createSlice({
     fetchDataSuccess: (state, action) => {
       //action is an object with a payload property
       state.agents = action.payload;
-      console.log(state.agents);
-      console.log(action.payload);
       state.error = null;
     },
     fetchDataFailure: (state, action) => {
@@ -21,8 +19,16 @@ const agentsSlice = createSlice({
       state.agents = null;
       state.error = action.payload;
     },
+    agentById: (state, action) => {
+      //action is an object with a payload property
+      state.agent = action.payload;
+      state.error = null;
+    },
   },
 });
 
-export const { fetchDataSuccess, fetchDataFailure } = agentsSlice.actions;
+
+
+export const { agentById, fetchDataSuccess, fetchDataFailure } = agentsSlice.actions;
+
 export default agentsSlice.reducer;

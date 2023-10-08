@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TextInput,
   ActivityIndicator,
+  Dimensions,
 } from "react-native";
 import { fetchBuddiesData } from "../services/buddiesService";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,24 +25,13 @@ const BuddiesScreen = () => {
       .catch(() => setIsLoading(false));
   }, []);
 
-  if (!buddies && isLoading) {
+  if (isLoading || !buddies) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
-
-  const renderBuddy = ({ item }) => (
-    <View style={styles.buddyContainer}>
-      <Image
-        source={{ uri: item.displayIcon }}
-        style={styles.buddyImage}
-        resizeMode="contain"
-      />
-      <Text style={styles.buddyName}>{item.displayName}</Text>
-    </View>
-  );
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -61,14 +51,21 @@ const BuddiesScreen = () => {
           value={searchQuery}
         />
       </View>
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : error ? (
+      {error ? (
         <Text style={styles.error}>{error}</Text>
       ) : (
         <FlatList
           data={filteredBuddies}
-          renderItem={renderBuddy}
+          renderItem={({ item }) => (
+            <View style={styles.buddyContainer}>
+              <Image
+                source={{ uri: item.displayIcon }}
+                style={styles.buddyImage}
+                resizeMode="contain"
+              />
+              <Text style={styles.buddyName}>{item.displayName}</Text>
+            </View>
+          )}
           keyExtractor={(item) => item.uuid}
           contentContainerStyle={styles.buddiesContainer}
         />
@@ -81,27 +78,43 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     padding: 16,
+    backgroundColor: "#fff",
+    width: Dimensions.get("window").width,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "start",
+    alignItems: "start",
   },
   buddiesContainer: {
-    alignItems: "center",
+    width: Dimensions.get("window").width - 32,
   },
   buddyContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
+    justifyContent: "space-between",
+    borderRadius: 10,
+    padding: 10,
+    width: Dimensions.get("window").width - 32,
+    shadowColor: "#999", // add a shadow color
+    shadowOffset: { width: 0, height: 2 }, // add a shadow offset
+    shadowOpacity: 0.5, // add a shadow opacity
+    shadowRadius: 2, // add a shadow radius
   },
   buddyImage: {
     width: 50,
-    height: 50,
+    height: 150,
     backgroundColor: "#333",
     borderRadius: 25,
     borderWidth: 2,
     borderColor: "#fff",
   },
   buddyName: {
+    flex: 1,
     fontSize: 18,
+    backgroundColor: "white",
     fontWeight: "bold",
     marginLeft: 16,
   },

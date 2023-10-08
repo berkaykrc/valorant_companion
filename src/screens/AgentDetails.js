@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ActivityIndicator, Image, StyleSheet, FlatList } from "react-native";
+import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 
 const AgentDetails = () => {
@@ -28,19 +28,19 @@ const AgentDetails = () => {
           <Text style={styles.abilityDescription}>{ultimateAbility.description}</Text>
         </View>
       </View>
-      <FlatList
-        data={agentData.abilities.filter((ability) => ability.slot !== "Ultimate")}
-        keyExtractor={(item) => item.slot}
-        renderItem={({ item }) => (
-          <View style={styles.abilityContainer}>
-            <Image source={{ uri: item.displayIcon }} style={styles.abilityImage} />
-            <View style={styles.abilityTextContainer}>
-              <Text style={styles.abilityName}>{item.displayName}</Text>
-              <Text style={styles.abilityDescription}>{item.description}</Text>
+      <ScrollView style={[styles.abilitiesContainer, { maxHeight: Dimensions.get("window").height / 4 }]}>
+        {agentData.abilities
+          .filter((ability) => ability.slot !== "Ultimate")
+          .map((ability) => (
+            <View key={ability.slot} style={styles.abilityContainer}>
+              <Image source={{ uri: ability.displayIcon }} style={styles.abilityImage} />
+              <View style={styles.abilityTextContainer}>
+                <Text style={styles.abilityName}>{ability.displayName}</Text>
+                <Text style={styles.abilityDescription}>{ability.description}</Text>
+              </View>
             </View>
-          </View>
-        )}
-      />
+          ))}
+      </ScrollView>
     </View>
   );
 };
@@ -94,6 +94,9 @@ const styles = StyleSheet.create({
   },
   abilityDescription: {
     fontSize: 16,
+  },
+  abilitiesContainer: {
+    width: "100%",
   },
 });
 

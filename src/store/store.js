@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import agentsReducer from "../reducers/agentsReducer";
 import gunsReducer from "../reducers/gunsReducer";
 import mapsReducer from "../reducers/mapsReducer";
+import buddiesReducer  from "../reducers/buddiesReducer";  
 import { Provider } from "react-redux";
 
 const store = configureStore({
@@ -9,7 +10,7 @@ const store = configureStore({
     agents: agentsReducer,
     //agent: agentReducer,
     maps: mapsReducer,
-    //buddies: buddiesReducer,
+    buddies: buddiesReducer,
     guns: gunsReducer
   },
 });

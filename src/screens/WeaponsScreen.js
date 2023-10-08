@@ -75,8 +75,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "#ccc", // change the color to a lower gray tone
     paddingVertical: 10,
+    shadowColor: "#999", // add a shadow color
+    shadowOffset: { width: 0, height: 1 }, // add a shadow offset
+    shadowOpacity: 0.5, // add a shadow opacity
+    shadowRadius: 1, // add a shadow radius
   },
   weaponImage: {
     width: 80,

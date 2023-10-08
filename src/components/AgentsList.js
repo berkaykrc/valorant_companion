@@ -9,6 +9,7 @@ import {
   Pressable,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchAgentById, fetchAgentsData } from "../services/agentServices";
 
 function AgentList({ navigation }) {

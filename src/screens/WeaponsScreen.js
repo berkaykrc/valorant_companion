@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View, FlatList, Image, Text, StyleSheet } from "react-native";
 import { fetchWeaponData } from "../services/weaponService";
 import { useSelector, useDispatch } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const WeaponsScreen = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,19 @@ const WeaponsScreen = () => {
                 <Text style={styles.weaponCategory}>
                   {item.shopData?.category || "Not available"}
                 </Text>
+                <View style={styles.weaponStats}>
+                  <Text style={styles.weaponPrice}>
+                    {item.shopData?.cost
+                      ? `${item.shopData.cost} VP`
+                      : "Not available"}
+                  </Text>
+                  <View style={styles.magazineContainer}>
+                    <Icon name="magazine-rifle" />
+                    <Text style={styles.magazineSize}>
+                      {item.weaponStats?.magazineSize || "Not available"}
+                    </Text>
+                  </View>
+                </View>
               </View>
             </View>
           )}
@@ -77,6 +91,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   weaponCategory: {
+    fontSize: 16,
+  },
+  weaponStats: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+  },
+  weaponPrice: {
+    fontSize: 16,
+    marginRight: 10,
+  },
+  magazineContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  magazineIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+  },
+  magazineSize: {
     fontSize: 16,
   },
 });

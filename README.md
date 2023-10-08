@@ -48,7 +48,7 @@ To get started with the Valorant Companion app, follow these steps:
 1. Clone this repository to your local machine.
    
    ```bash
-   git clone <https://github.com/berkaykrc/valorant_companion.git>
+   git clone https://github.com/berkaykrc/valorant_companion.git
    ```
 
 2. Install the necessary dependencies.

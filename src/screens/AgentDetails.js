@@ -3,9 +3,9 @@ import { View, Text, ActivityIndicator, Image, StyleSheet, ScrollView, Dimension
 import { useSelector } from "react-redux";
 
 const AgentDetails = () => {
-  const agentData = useSelector((state) => state.agents.agent);
+  const agent = useSelector((state) => state.agents.agent);
 
-  if (!agentData) {
+  if (!agent) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#0000ff" />
@@ -13,15 +13,15 @@ const AgentDetails = () => {
     );
   }
 
-  const ultimateAbility = agentData.abilities.find((ability) => ability.slot === "Ultimate");
-  const otherAbilities = agentData.abilities.filter((ability) => ability.slot !== "Ultimate");
+  const ultimateAbility = agent.abilities.find((ability) => ability.slot === "Ultimate");
+  const otherAbilities = agent.abilities.filter((ability) => ability.slot !== "Ultimate");
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: agentData.displayIcon }} style={styles.image} />
-      <Text style={styles.name}>{agentData.displayName}</Text>
-      <Text style={styles.role}>{agentData.role.displayName}</Text>
-      <Text style={styles.description}>{agentData.description}</Text>
+      <Image source={{ uri: agent.displayIcon }} style={styles.image} />
+      <Text style={styles.name}>{agent.displayName}</Text>
+      <Text style={styles.role}>{agent.role.displayName}</Text>
+      <Text style={styles.description}>{agent.description}</Text>
       {ultimateAbility && (
         <View style={styles.abilityContainer}>
           <Image source={{ uri: ultimateAbility.displayIcon }} style={styles.abilityImage} />
@@ -66,9 +66,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   role: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "700",
     marginBottom: 8,
+    color: "#333",
   },
   description: {
     fontSize: 16,

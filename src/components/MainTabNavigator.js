@@ -14,7 +14,7 @@ function MainTabNavigator() {
                 component={AgentStack}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="user" size={size} color={color} />
+                        <Icon name="user-secret" size={size} color={color} />
                     ),
                 }}
             />

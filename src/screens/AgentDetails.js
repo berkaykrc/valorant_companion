@@ -14,6 +14,7 @@ const AgentDetails = () => {
   }
 
   const ultimateAbility = agentData.abilities.find((ability) => ability.slot === "Ultimate");
+  const otherAbilities = agentData.abilities.filter((ability) => ability.slot !== "Ultimate");
 
   return (
     <View style={styles.container}>
@@ -21,17 +22,18 @@ const AgentDetails = () => {
       <Text style={styles.name}>{agentData.displayName}</Text>
       <Text style={styles.role}>{agentData.role.displayName}</Text>
       <Text style={styles.description}>{agentData.description}</Text>
-      <View style={styles.abilityContainer}>
-        <Image source={{ uri: ultimateAbility.displayIcon }} style={styles.abilityImage} />
-        <View style={styles.abilityTextContainer}>
-          <Text style={styles.abilityName}>{ultimateAbility.displayName}</Text>
-          <Text style={styles.abilityDescription}>{ultimateAbility.description}</Text>
+      {ultimateAbility && (
+        <View style={styles.abilityContainer}>
+          <Image source={{ uri: ultimateAbility.displayIcon }} style={styles.abilityImage} />
+          <View style={styles.abilityTextContainer}>
+            <Text style={styles.abilityName}>{ultimateAbility.displayName}</Text>
+            <Text style={styles.abilityDescription}>{ultimateAbility.description}</Text>
+          </View>
         </View>
-      </View>
-      <ScrollView style={[styles.abilitiesContainer, { maxHeight: Dimensions.get("window").height / 4 }]}>
-        {agentData.abilities
-          .filter((ability) => ability.slot !== "Ultimate")
-          .map((ability) => (
+      )}
+      {otherAbilities.length > 0 && (
+        <ScrollView style={[styles.abilitiesContainer, { maxHeight: Dimensions.get("window").height / 4 }]}>
+          {otherAbilities.map((ability) => (
             <View key={ability.slot} style={styles.abilityContainer}>
               <Image source={{ uri: ability.displayIcon }} style={styles.abilityImage} />
               <View style={styles.abilityTextContainer}>
@@ -40,7 +42,8 @@ const AgentDetails = () => {
               </View>
             </View>
           ))}
-      </ScrollView>
+        </ScrollView>
+      )}
     </View>
   );
 };

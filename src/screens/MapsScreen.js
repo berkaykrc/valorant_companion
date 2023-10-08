@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const MapsScreen = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.maps);
+  const maps = useSelector((state) => state.maps.maps);
   const error = useSelector((state) => state.error);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const MapsScreen = () => {
         <Text style={styles.error}>{error}</Text>
       ) : (
         <FlatList
-          data={data.maps}
+          data={maps}
           keyExtractor={(item) => item.uuid.toString()}
           renderItem={renderItem}
           contentContainerStyle={styles.listContainer}
@@ -54,26 +54,31 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   mapContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
     paddingVertical: 10,
   },
   mapImage: {
-    width: 80,
+    width: 390,
     height: 80,
-    marginRight: 10,
+    borderRadius: 10,
+    marginBottom: 10,
   },
   mapInfo: {
     flex: 1,
+    alignItems: "center",
   },
   mapName: {
     fontSize: 18,
     fontWeight: "bold",
+    marginBottom: 5,
+    color: "#333",
   },
   mapDescription: {
     fontSize: 16,
+    color: "#666",
   },
 });
 

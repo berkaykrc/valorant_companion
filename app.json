@@ -8,11 +8,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
+    "icon": "./src/assets/icon.png",
     "android":{
       "package": "com.valorantapp",
       "versionCode": 1,
-      "adaptiveIcon": {
-        "foregroundImage": "src/assets/adaptive-icon.png",
+      "adaptiveicon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#000000"
       }
     },

@@ -3,15 +3,13 @@ import {
     fetchBuddiesDataSuccess,
     fetchBuddiesDataFailure,
 } from "../reducers/buddiesReducer";
-
-
-const BASE_URL = "https://valorant-api.com/v1";
+import { API_BASEURL } from "@env";
 
 export const fetchBuddiesData = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(
-                `${BASE_URL}/buddies`
+                `${API_BASEURL}/buddies`
             );
             const { data } = response.data;
             dispatch(fetchBuddiesDataSuccess(data));

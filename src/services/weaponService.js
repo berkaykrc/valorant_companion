@@ -1,12 +1,11 @@
 import axios from "axios";
 import { fetchDataSuccess, fetchDataFailure } from "../reducers/gunsReducer";
-
-const BASE_URL = "https://valorant-api.com/v1";
+import { API_BASEURL } from "@env";
 
 export const fetchWeaponData = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${BASE_URL}/weapons`);
+      const response = await axios.get(`${API_BASEURL}/weapons`);
       const { data } = response.data;
       dispatch(fetchDataSuccess(data));
     } catch (error) {

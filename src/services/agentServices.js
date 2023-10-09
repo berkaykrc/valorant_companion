@@ -2,16 +2,15 @@ import axios from "axios";
 import {
   fetchDataSuccess,
   fetchDataFailure,
-  agentById
+  agentById,
 } from "../reducers/agentsReducer";
-
-const BASE_URL = "https://valorant-api.com/v1";
+import { API_BASEURL } from "@env";
 
 export const fetchAgentsData = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/agents?isPlayableCharacter=true`
+        `${API_BASEURL}/agents?isPlayableCharacter=true`
       );
       const { data } = response.data;
       dispatch(fetchDataSuccess(data));
@@ -25,7 +24,7 @@ export const fetchAgentsData = () => {
 export const fetchAgentById = ({ uuid }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${BASE_URL}/agents/${uuid}`);
+      const response = await axios.get(`${API_BASEURL}/agents/${uuid}`);
       const { data } = response.data;
       dispatch(agentById(data));
     } catch (error) {

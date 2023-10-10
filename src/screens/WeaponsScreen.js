@@ -69,18 +69,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   listContainer: {
-    paddingBottom: 10,
+    paddingBottom: 5,
   },
   weaponContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc", // change the color to a lower gray tone
-    paddingVertical: 10,
-    shadowColor: "#999", // add a shadow color
-    shadowOffset: { width: 0, height: 1 }, // add a shadow offset
-    shadowOpacity: 0.5, // add a shadow opacity
-    shadowRadius: 1, // add a shadow radius
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 2,
   },
   weaponImage: {
     width: 80,

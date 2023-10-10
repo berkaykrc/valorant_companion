@@ -66,11 +66,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     padding: 10,
-    shadowColor: "#999", // add a shadow color
-    shadowOffset: { width: 0, height: 1 }, // add a shadow offset
-    shadowOpacity: 0.5, // add a shadow opacity
-    shadowRadius: 1, // add a shadow radius
-    elevation: 5, // for android
+    shadowColor: "#000",
+    backgroundColor: "#fff",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   mapDescription: {
     fontSize: 16,

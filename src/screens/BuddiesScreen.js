@@ -98,10 +98,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     width: Dimensions.get("window").width - 32,
-    shadowColor: "#999", // add a shadow color
-    shadowOffset: { width: 0, height: 2 }, // add a shadow offset
-    shadowOpacity: 0.5, // add a shadow opacity
-    shadowRadius: 2, // add a shadow radius
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    shadowRadius: 2,
   },
   buddyImage: {
     width: 50,
